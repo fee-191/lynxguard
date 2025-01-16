@@ -4,6 +4,8 @@
 > Graduation Thesis (IAP491) · FPT University, Hoa Lac Campus · Sep–Dec 2024  
 > Team of 4 · Thesis honored by faculty council
 
+📽️ **[Xem demo video](https://github.com/fee-191/lynxguard/releases/download/v1.0/lynxguard-demo.mp4)** · 📄 **[Slides (PDF)](https://github.com/fee-191/lynxguard/releases/download/v1.0/lynxguard-slides.pdf)**
+
 ---
 
 ## Problem Statement
