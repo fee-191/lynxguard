@@ -10,7 +10,7 @@
 
 ## Problem Statement
 
-FPT Education's web applications (fap.fpt.edu.vn, fu-edunext.fpt.edu.vn, career.fpt.edu.vn) lacked continuous security monitoring. The existing setup relied on manual checks and isolated tools — no unified pipeline for detecting, correlating, and alerting on web attacks in real-time. Attacks like SQLi, XSS, brute force, and DoS could go undetected for extended periods.
+A university's web applications lacked continuous security monitoring. The existing setup relied on manual checks and isolated tools — no unified pipeline for detecting, correlating, and alerting on web attacks in real-time. Attacks like SQLi, XSS, brute force, and DoS could go undetected for extended periods.
 
 LynxGuard addresses this by integrating multiple open-source security tools into a cohesive SOC pipeline: from network-level detection (Snort) to application-layer filtering (ModSecurity), centralized log aggregation and correlation (Wazuh SIEM), infrastructure monitoring (Zabbix), and real-time alerting (Telegram bot).
 
@@ -147,6 +147,27 @@ Working as part of a 4-person team:
 - **Network design:** Designed virtual network topology with isolated segments (WAN, LAN, DMZ zones) to simulate real enterprise traffic flow
 - **pfSense configuration:** Firewall rules, NAT policies, inter-zone routing, syslog forwarding to Wazuh
 - **Telegram bot (Python):** Wrote the alerting bot that subscribes to Zabbix and Wazuh alert webhooks and pushes formatted notifications to the team Telegram group; handles alert severity filtering and message formatting
+
+```python
+# Alert handler — filters severity and formats message
+def handle_alert(alert: dict) -> None:
+    severity = alert.get("rule", {}).get("level", 0)
+    if severity < ALERT_THRESHOLD:   # ignore low-severity noise
+        return
+
+    source = alert.get("agent", {}).get("name", "unknown")
+    rule   = alert.get("rule", {}).get("description", "")
+    time   = alert.get("timestamp", "")
+
+    msg = (
+        f"🚨 *Security Alert*\n"
+        f"*Source:* `{source}`\n"
+        f"*Rule:* {rule}\n"
+        f"*Severity:* {severity}/15\n"
+        f"*Time:* {time}"
+    )
+    bot.send_message(chat_id=CHAT_ID, text=msg, parse_mode="Markdown")
+```
 
 ---
 
