@@ -195,3 +195,5 @@ def handle_alert(alert: dict) -> None:
 - [Snort 3 Documentation](https://www.snort.org/documents)
 - [Wazuh Documentation](https://documentation.wazuh.com/)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+
+<!-- updated: 2026-06-08 -->
